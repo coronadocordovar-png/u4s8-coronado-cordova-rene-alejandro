@@ -9,7 +9,7 @@
 
 https://u4s8-coronado-cordova-rene-alejandro.onrender.com
 
-Nota: URL prevista para el nuevo servicio. Se confirmará después del despliegue en Render.
+URL del servicio publicado en Render. Las pruebas funcionales completas de producción deben verificarse por separado.
 
 ## Qué hace este proyecto
 
@@ -58,4 +58,39 @@ La configuración privada se administra mediante variables de entorno. El archiv
 
 El respaldo final `backup_final.json` se generó fuera del repositorio para evitar publicar información de los usuarios.
 
-La configuración de producción y el funcionamiento del sistema se verificarán en Render antes de publicar la versión definitiva.
+El código y la versión v1.0 están publicados. La validación funcional completa en producción y la restauración del respaldo permanecen pendientes de confirmar.
+
+
+## Release publicada y restauración
+
+### Release v1.0
+
+La versión final del proyecto se publicó en GitHub Releases.
+
+Enlace:
+https://github.com/coronadocordovar-png/u4s8-coronado-cordova-rene-alejandro/releases/tag/v1.0
+
+### Respaldo de datos
+
+Archivo: backup_final.json
+
+Ubicación local:
+C:\Users\coron\Documents\4-1\backup_final.json
+
+Fecha: 26/10/2026
+
+El archivo se conserva fuera del repositorio y no está incluido en la Release.
+
+### Generación y restauración
+
+Para generar un respaldo JSON con Django:
+
+    python manage.py dumpdata --indent 2 -o backup_final.json
+
+Para restaurar los datos en una base de datos de prueba,
+con las migraciones previamente aplicadas:
+
+    python manage.py loaddata backup_final.json
+
+Estos comandos se documentan como procedimiento de referencia.
+La restauración todavía no se ha comprobado.
