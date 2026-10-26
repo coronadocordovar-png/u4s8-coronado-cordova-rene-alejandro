@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Servicios</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f9; color: #222; }
+        nav { background: #253858; padding: 18px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+        nav a, nav span { color: white; text-decoration: none; }
+        nav form { margin: 0; }
+        nav button { background: #415b84; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+        main { max-width: 850px; margin: 35px auto; background: white; padding: 30px; border-radius: 10px; }
+        input, textarea, select { display: block; width: 100%; max-width: 550px; padding: 9px; margin-top: 6px; box-sizing: border-box; }
+        main button { background: #253858; color: white; padding: 11px 18px; border: none; border-radius: 5px; cursor: pointer; }
+        main a { display: inline-block; margin-top: 18px; }
+        .errorlist { color: #b00020; }
+        .mensaje { background: #e5f2ff; padding: 12px; border-radius: 5px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'servicios' %}">Servicios</a>
+        <a href="{% url 'contacto' %}">Contacto</a>
+
+        {% if user.is_authenticated %}
+            <span>Hola, {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'registro' %}">Registrarse</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="mensaje">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>
